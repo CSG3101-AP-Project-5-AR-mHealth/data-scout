@@ -9,6 +9,7 @@ import sys
 import os
 import glob
 import time
+import datetime
  
 NETWORK_KEY = [0xB9, 0xA5, 0x21, 0xFB, 0xBD, 0x72, 0xC3, 0x45]
 
@@ -39,16 +40,12 @@ def get_temp():
 def on_data(data):
     heartrate = data[7]
     temp = get_temp()
-    string = "Heartrate: " + str(heartrate) + " [BPM], Body Temp: " + str(temp) + " [Celcius]"
-
-    sys.stdout.write(string)
-    sys.stdout.flush()
-    sys.stdout.write("\b" * len(string))
+    now = datetime.datetime.now()
+    message = str(now) + " Heartrate: " + str(heartrate) + " [BPM], Body Temp: " + str(temp) + " [Celsius]"
+    print(message)
 
 
 def main():
-    # logging.basicConfig()
-
     node = Node()
     node.set_network_key(0x00, NETWORK_KEY)
 
