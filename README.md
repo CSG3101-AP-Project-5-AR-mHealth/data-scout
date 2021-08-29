@@ -12,13 +12,13 @@ Stainless Steel Housing Waterproof DS18B20 Temperature Probe
 Arduino Compatible Breadboard with 400 Tie Points
 ```
 Temperature probe wiring for correct operations:
-![correct wiring for temperature probe](https://github.com/CSG3101-AP-Project-5-AR-mHealth/data-scout/images/tempProbe.png)
+![correct wiring for temperature probe](https://github.com/CSG3101-AP-Project-5-AR-mHealth/data-scout/tree/main/images/tempProbe.png)
 
 Wiring for the Raspberry Pi:
-![simple wiring diagram with all the components](https://github.com/CSG3101-AP-Project-5-AR-mHealth/data-scout/images/example.png)
+![simple wiring diagram with all the components](https://github.com/CSG3101-AP-Project-5-AR-mHealth/data-scout/tree/main/images/example.png)
 
 Pin mapping for pi 4:
-![correct wiring for temperature probe](https://github.com/CSG3101-AP-Project-5-AR-mHealth/data-scout/images/pi4map.png)
+![correct wiring for temperature probe](https://github.com/CSG3101-AP-Project-5-AR-mHealth/data-scout/tree/main/images/pi4map.png)
 
 Installed Software on Pi Requirements:
 
