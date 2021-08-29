@@ -12,12 +12,15 @@ Stainless Steel Housing Waterproof DS18B20 Temperature Probe
 Arduino Compatible Breadboard with 400 Tie Points
 ```
 Temperature probe wiring for correct operations:
-![correct wiring for temperature probe](images/tempProbe.PNG)
+
+![correct wiring for temperature probe](images/tempProbe.PNG )
 
 Wiring for the Raspberry Pi:
+
 ![simple wiring diagram with all the components](images/example.PNG)
 
 Pin mapping for pi 4:
+
 ![correct wiring for temperature probe](images/pi4map.PNG)
 
 Installed Software on Pi Requirements:
