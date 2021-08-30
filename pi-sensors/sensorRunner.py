@@ -10,6 +10,7 @@ import os
 import glob
 import time
 import datetime
+import mariadb 
  
 NETWORK_KEY = [0xB9, 0xA5, 0x21, 0xFB, 0xBD, 0x72, 0xC3, 0x45]
 
@@ -19,6 +20,24 @@ os.system('modprobe w1-therm')
 base_dir = '/sys/bus/w1/devices/'
 device_folder = glob.glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
+
+
+#insert information 
+def insert(heart_rate, body_temp):
+    try: 
+        conn = mariadb.connect(
+        user="root",
+        password="",
+        host="localhost",
+        database="vitaldb")
+        cur = conn.cursor() 
+
+        cur.execute("INSERT INTO vitals (heart_rate, body_temp) VALUES (?, ?)", (heart_rate, body_temp)) 
+    except mariadb.Error as e: 
+        print(f"Error: {e}")
+    finally:
+        conn.commit() 
+        conn.close()
 
 def get_temp_raw():
     f = open(device_file, 'r')
@@ -43,7 +62,7 @@ def on_data(data):
     now = datetime.datetime.now()
     message = str(now) + " Heartrate: " + str(heartrate) + " [BPM], Body Temp: " + str(temp) + " [Celsius]"
     print(message)
-
+    insert(heartrate, temp)
 
 def main():
     node = Node()
