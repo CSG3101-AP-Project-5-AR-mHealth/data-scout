@@ -65,11 +65,14 @@ git clone https://github.com/Tigge/openant.git
 ```
 2. Follow the instructions for setup in read me
 
-## Setup Mysql
+## Setup Mysql for Pi
 
 1. Install Mysql using either `sudo apt-get install mariadb-server` or `sudo apt-get install mysql-server`
 2. Run `sudo mysql_secure_installation` follow prompts once done run `sudo mysql -u root -p`
 3. Add python connector: `sudo apt-get -y install python3-mysql.connector`
+4. sudo chmod -R 755 /var/lib/mysql/
+5. Run `createUser.sql` 
+6. then `/etc/init.d/mysql restart`
 
 
 ## Setup for converting raw csv files

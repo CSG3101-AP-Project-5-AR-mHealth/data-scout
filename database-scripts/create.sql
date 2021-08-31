@@ -5,10 +5,14 @@ CREATE TABLE vitals
 (
     id int(11) NOT NULL,
     heart_rate int(11) NOT NULL,
-    body_temp int(11) NOT NULL,
+    body_temp DECIMAL(4,2) NOT NULL,
     eventTime timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 );
 
 ALTER TABLE vitals
+    ADD PRIMARY KEY (id);
+
+ALTER TABLE vitals
     MODIFY id int(11) NOT NULL AUTO_INCREMENT;
+    
 SHOW TABLES;

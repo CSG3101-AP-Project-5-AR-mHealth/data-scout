@@ -26,18 +26,17 @@ device_file = device_folder + '/w1_slave'
 def insert(heart_rate, body_temp):
     try: 
         conn = mariadb.connect(
-        user="root",
-        password="",
-        host="localhost",
-        database="vitaldb")
-        cur = conn.cursor() 
-
+            user="test",
+            password="pass",
+            host="localhost",
+            database="vitalsdb")        
+        cur = conn.cursor()
         cur.execute("INSERT INTO vitals (heart_rate, body_temp) VALUES (?, ?)", (heart_rate, body_temp)) 
-    except mariadb.Error as e: 
-        print(f"Error: {e}")
-    finally:
         conn.commit() 
         conn.close()
+    except mariadb.Error as e: 
+        print(f"Error: {e}")
+        print("failed to insert")
 
 def get_temp_raw():
     f = open(device_file, 'r')
