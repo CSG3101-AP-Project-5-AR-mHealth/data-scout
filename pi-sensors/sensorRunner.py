@@ -52,7 +52,7 @@ def get_temp():
     equals_pos = lines[1].find('t=')
     if equals_pos != -1:
         temp_string = lines[1][equals_pos+2:]
-        temp_c = (float(temp_string) / 1000.0) + 1
+        temp_c = (float(temp_string) / 1000.0) + 4
         return temp_c
 
 def on_data(data):
