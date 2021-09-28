@@ -60,7 +60,7 @@ for f in filenames:
         print (row)
         json_obj.append([{
             'datetime' : date + 'T'+ row[4]+'Z',
-            'heartRate' : row[7],
+            'heartRate' : int(row[7]),
             'steps': 5000,
             'temperature':  random.randint(35,37)
         }])
@@ -68,4 +68,4 @@ for f in filenames:
     with open('test_data.json','w') as jsonFile:
         json.dump(json_obj, jsonFile)
 
-# {"datetime": "2000-12-12T01:13:13Z", "heartRate": 500, "steps": 12000, "temperature": 27}
+# Desired Format {"datetime": "2000-12-12T01:13:13Z", "heartRate": 500, "steps": 12000, "temperature": 27}
