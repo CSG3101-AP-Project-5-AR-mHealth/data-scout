@@ -19,6 +19,7 @@ def main():
             time.sleep(2)
     else:        
         heartSensor = HeartSensor()
+        heartSensor.run()
 
              
 
