@@ -11,28 +11,43 @@ import glob
 import time
 import datetime
 
+from sensors.postdata import send_data_to_api
+from sensors.tempsensor import TempSensor
+
+NETWORK_KEY = [0xB9, 0xA5, 0x21, 0xFB, 0xBD, 0x72, 0xC3, 0x45]
 
 
 class HeartSensor:
-    def __init__(self, on_data):
-        self.node = Node()    
-        self.node.set_network_key(0x00, [0xB9, 0xA5, 0x21, 0xFB, 0xBD, 0x72, 0xC3, 0x45])
-        self.channel = self.node.new_channel(Channel.Type.BIDIRECTIONAL_RECEIVE)
-
-        self.channel.on_broadcast_data = on_data
-        self.channel.on_burst_data = on_data
-
-        self.channel.set_period(8070)
-        self.channel.set_search_timeout(12)
-        self.channel.set_rf_freq(57)
-        self.channel.set_id(0, 120, 0)
+    def __init__(self):
+        self.t_sensor = tempsensor.TempSensor()
     
+    def on_data(self, data):
+      heartrate = data[7]
+      temp = t_sensor.get_temp()
+      now = datetime.datetime.now()
+      d = now.strftime('%Y-%m-%dT%H:%M:%SZ')
+      postdata.send_data_to_api({"datetime": d, "heartRate": int(heartrate), "steps": 5000, "temperature": int(temp)})
+
+
     def run(self):
-      try:
-        self.channel.open()
-        self.node.start()
-      finally:
-        self.node.stop()
+        node = Node()
+        node.set_network_key(0x00, NETWORK_KEY)
+
+        channel = node.new_channel(Channel.Type.BIDIRECTIONAL_RECEIVE)
+
+        channel.on_broadcast_data = on_data
+        channel.on_burst_data = on_data
+
+        channel.set_period(8070)
+        channel.set_search_timeout(12)
+        channel.set_rf_freq(57)
+        channel.set_id(0, 120, 0)
+
+        try:
+            channel.open()
+            node.start()
+        finally:
+            node.stop()
         
 
 
