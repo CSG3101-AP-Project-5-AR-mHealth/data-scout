@@ -14,12 +14,9 @@ import datetime
 
 
 class HeartSensor:
-    
-    
     def __init__(self, on_data):
-        self.NETWORK_KEY = [0xB9, 0xA5, 0x21, 0xFB, 0xBD, 0x72, 0xC3, 0x45]
         self.node = Node()    
-        self.node.set_network_key(0x00, NETWORK_KEY)
+        self.node.set_network_key(0x00, [0xB9, 0xA5, 0x21, 0xFB, 0xBD, 0x72, 0xC3, 0x45])
         self.channel = node.new_channel(Channel.Type.BIDIRECTIONAL_RECEIVE)
 
         self.channel.on_broadcast_data = on_data

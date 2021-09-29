@@ -9,7 +9,7 @@ from sensors.tempsensor import TempSensor
 
 DEMO_MODE = True
 
-if DEMO_MODE:
+if not DEMO_MODE:
     t_sensor = TempSensor()
 
 def on_data(data):
