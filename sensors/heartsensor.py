@@ -15,21 +15,17 @@ from sensors.postdata import send_data_to_api
 from sensors.tempsensor import TempSensor
 
 NETWORK_KEY = [0xB9, 0xA5, 0x21, 0xFB, 0xBD, 0x72, 0xC3, 0x45]
+t_sensor = TempSensor()
 
-
-class HeartSensor:
-    def __init__(self):
-        self.t_sensor = TempSensor()
-    
-    def on_data(self, data):
+def on_data(self, data):
       heartrate = data[7]
       temp = t_sensor.get_temp()
       now = datetime.datetime.now()
       d = now.strftime('%Y-%m-%dT%H:%M:%SZ')
       send_data_to_api({"datetime": d, "heartRate": int(heartrate), "steps": 5000, "temperature": int(temp)})
 
-
-    def run(self):
+class HeartSensor:
+    def __init__(self):
         node = Node()
         node.set_network_key(0x00, NETWORK_KEY)
 
