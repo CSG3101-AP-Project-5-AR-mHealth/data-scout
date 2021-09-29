@@ -22,7 +22,7 @@ def on_data(data):
       temp = t_sensor.get_temp()
       now = datetime.datetime.now()
       d = now.strftime('%Y-%m-%dT%H:%M:%SZ')
-      send_data_to_api({"datetime": d, "heartRate": int(heartrate), "steps": 5000, "temperature": int(temp)})
+      send_data_to_api([{"datetime": d, "heartRate": int(heartrate), "steps": 5000, "temperature": int(temp)}])
 
 class HeartSensor:
     def __init__(self):
