@@ -19,14 +19,14 @@ NETWORK_KEY = [0xB9, 0xA5, 0x21, 0xFB, 0xBD, 0x72, 0xC3, 0x45]
 
 class HeartSensor:
     def __init__(self):
-        self.t_sensor = tempsensor.TempSensor()
+        self.t_sensor = TempSensor()
     
     def on_data(self, data):
       heartrate = data[7]
       temp = t_sensor.get_temp()
       now = datetime.datetime.now()
       d = now.strftime('%Y-%m-%dT%H:%M:%SZ')
-      postdata.send_data_to_api({"datetime": d, "heartRate": int(heartrate), "steps": 5000, "temperature": int(temp)})
+      send_data_to_api({"datetime": d, "heartRate": int(heartrate), "steps": 5000, "temperature": int(temp)})
 
 
     def run(self):
