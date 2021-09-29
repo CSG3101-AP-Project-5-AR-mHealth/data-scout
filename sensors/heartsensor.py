@@ -17,7 +17,7 @@ from sensors.tempsensor import TempSensor
 NETWORK_KEY = [0xB9, 0xA5, 0x21, 0xFB, 0xBD, 0x72, 0xC3, 0x45]
 t_sensor = TempSensor()
 
-def on_data(self, data):
+def on_data(data):
       heartrate = data[7]
       temp = t_sensor.get_temp()
       now = datetime.datetime.now()
