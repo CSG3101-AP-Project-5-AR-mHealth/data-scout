@@ -21,9 +21,8 @@ def main():
             if len(raw_data) > 1:
                 if bot.isReadyToInfer(raw_data[0]["datetime"], raw_data[-1]["datetime"]):
                     inferred = bot.runInferBot(raw_data)
-                    for inferredItem in inferred:
-                        send_data_to_api(inferredItem)
-                    raw_data = []
+                    send_data_to_api(inferred)
+                    raw_data.clear()
             time.sleep(2)
     else:        
         heartSensor = HeartSensor()
