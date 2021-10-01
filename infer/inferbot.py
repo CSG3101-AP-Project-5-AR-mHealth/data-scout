@@ -1,7 +1,6 @@
 import time
 import json
 from tqdm import tqdm
-import matplotlib.pyplot as plt
 import infer.botutils as bot
 import datetime
 

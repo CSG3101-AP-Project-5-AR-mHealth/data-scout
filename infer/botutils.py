@@ -1,7 +1,6 @@
 import time
 import json
 from tqdm import tqdm
-from numpy import trapz
 
 def parse_bpm(data):
     # declare lists
@@ -114,30 +113,3 @@ def find_INF_points(X):
         
     return INF_V, Beacon_points
     # print('total len: ',len(INF_V)) 
-
-
-def find_areas(X, INF_V):
-    Su_points=[]
-    Sl_points =[]
-    So_Area = 0
-    # temp_Area = 0
-    for rv,inf in zip(X,INF_V):
-        if inf>rv:
-            Su_points.append(inf-rv)
-        elif inf<=rv:
-            Sl_points.append(rv-inf)
-        
-    So = trapz(X, dx=5)
-
-    Su = trapz(Su_points, dx=5)
-
-    Sl = trapz(Sl_points, dx=5)
-    
-    print('So area: ',So)
-
-    print('Sl area: ',Sl)
-    print('Su area: ',Su)
-
-    S = Su + Sl
-    print('S area: ',S)
-    return(So, Su, Sl, S)
