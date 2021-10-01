@@ -22,7 +22,7 @@ def find_max_min(X):
     RV = X
     Beacon_list  = []
     Beacon_points = []
-    print('total len: ',len(RV))
+    # print('total len: ',len(RV))
 
     i=1
     while i<len(RV):
@@ -53,7 +53,7 @@ def find_INF_points(X):
     RV = X
     INF_V  = []
     Beacon_points = []
-    print('total len: ',len(RV))
+    # print('total len: ',len(RV))
 
     VR_Gap = 0.3
     VR = 0.1

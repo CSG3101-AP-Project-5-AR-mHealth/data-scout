@@ -16,6 +16,7 @@ def main():
         data = json.loads(jsonContent)
         raw_data = []
         for item in data:
+            print("[",item["datetime"],"] Heart Rate [", item["heartRate"], "], Body Temperature [", item["temperature"], "]")
             raw_data.append(item)
             if len(raw_data) > 1:
                 if bot.isReadyToInfer(raw_data[0]["datetime"], raw_data[-1]["datetime"]):
