@@ -11,18 +11,28 @@ import glob
 import time
 import datetime
 
-from sensors.postdata import send_data_to_api
+from api.postdata import send_data_to_api
 from sensors.tempsensor import TempSensor
+import infer.inferbot as bot
 
 NETWORK_KEY = [0xB9, 0xA5, 0x21, 0xFB, 0xBD, 0x72, 0xC3, 0x45]
 t_sensor = TempSensor()
+raw_data = []
 
 def on_data(data):
-      heartrate = data[7]
-      temp = t_sensor.get_temp()
-      now = datetime.datetime.now()
-      d = now.strftime('%Y-%m-%dT%H:%M:%SZ')
-      send_data_to_api([{"datetime": d, "heartRate": int(heartrate), "steps": 5000, "temperature": int(temp)}])
+    heartrate = data[7]
+    temp = t_sensor.get_temp()
+    now = datetime.datetime.now()
+    d = now.strftime(bot.date_format)
+    raw_data.append({"datetime": d, "heartRate": int(heartrate), "steps": 0, "temperature": int(temp)})
+    if len(raw_data) > 1:
+        if bot.isReadyToInfer(raw_data[0]["datetime"], raw_data[-1]["datetime"]):
+            inferred = bot.runInferBot(raw_data)
+            for inferredItem in inferred:
+                send_data_to_api(inferredItem)
+            raw_data.clear()
+            
+                
 
 class HeartSensor:
     def __init__(self):

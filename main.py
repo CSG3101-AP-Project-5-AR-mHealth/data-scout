@@ -3,9 +3,9 @@ import time
 import os
 import datetime
 
-from sensors.postdata import send_data_to_api
+from api.postdata import send_data_to_api
 from sensors.heartsensor import HeartSensor
-from sensors.tempsensor import TempSensor
+import infer.inferbot as bot
 
 DEMO_MODE = True
 
@@ -14,8 +14,16 @@ def main():
         fileObject = open('data-formatter/test_data.json', 'r')
         jsonContent = fileObject.read()
         data = json.loads(jsonContent)
+        raw_data = []
         for item in data:
-            send_data_to_api(item)
+            raw_data.append(item)
+            if len(raw_data) > 1:
+                print(raw_data)
+                if bot.isReadyToInfer(raw_data[0]["datetime"], raw_data[-1]["datetime"]):
+                    inferred = bot.runInferBot(raw_data)
+                    for inferredItem in inferred:
+                        send_data_to_api(item)
+                    raw_data = []
             time.sleep(2)
     else:        
         heartSensor = HeartSensor()

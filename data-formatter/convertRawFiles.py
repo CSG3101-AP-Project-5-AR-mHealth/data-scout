@@ -58,12 +58,12 @@ for f in filenames:
     json_obj = []
     for row in newDataList:                      
         print (row)
-        json_obj.append([{
+        json_obj.append({
             'datetime' : date + 'T'+ row[4]+'Z',
             'heartRate' : int(row[7]),
             'steps': 5000,
             'temperature':  random.randint(35,37)
-        }])
+        })
 
     with open('test_data.json','w') as jsonFile:
         json.dump(json_obj, jsonFile)

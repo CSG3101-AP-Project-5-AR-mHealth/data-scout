@@ -4,11 +4,12 @@ import time
 
 class TempSensor:
   def __init__(self):
-    os.system('modprobe w1-gpio')
-    os.system('modprobe w1-therm')
-    self.base_dir = '/sys/bus/w1/devices/'
-    self.device_folder = glob.glob(self.base_dir + '28*')[0]
-    self.device_file = self.device_folder + '/w1_slave'
+    if os.name != 'nt':
+      os.system('modprobe w1-gpio')
+      os.system('modprobe w1-therm')
+      self.base_dir = '/sys/bus/w1/devices/'
+      self.device_folder = glob.glob(self.base_dir + '28*')[0]
+      self.device_file = self.device_folder + '/w1_slave'
 
   def get_temp_raw(self):
     f = open(self.device_file, 'r')
