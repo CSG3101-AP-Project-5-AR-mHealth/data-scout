@@ -20,18 +20,21 @@ t_sensor = TempSensor()
 raw_data = []
 
 def on_data(data):
-    heartrate = data[7]
-    temp = t_sensor.get_temp()
-    now = datetime.datetime.now()
-    d = now.strftime(bot.date_format)
-    obj = {"datetime": d, "heartRate": int(heartrate), "steps": 0, "temperature": int(temp)}
-    print("[",d,"] Heart Rate [", heartrate, "], Body Temperature [", temp, "]")
-    raw_data.append(obj)
-    if len(raw_data) > 1:
-        if bot.isReadyToInfer(raw_data[0]["datetime"], raw_data[-1]["datetime"]):
-            inferred = bot.runInferBot(raw_data)
-            send_data_to_api(inferred)
-            raw_data.clear()
+    try:
+        heartrate = data[7]
+        temp = t_sensor.get_temp()
+        now = datetime.datetime.now()
+        d = now.strftime(bot.date_format)
+        obj = {"datetime": d, "heartRate": int(heartrate), "steps": 0, "temperature": int(temp)}
+        print("[",d,"] Heart Rate [", heartrate, "], Body Temperature [", temp, "]")
+        raw_data.append(obj)
+        if len(raw_data) > 1:
+            if bot.isReadyToInfer(raw_data[0]["datetime"], raw_data[-1]["datetime"]):
+                inferred = bot.runInferBot(raw_data)
+                send_data_to_api(inferred)
+                raw_data.clear()
+    except Exception as e:
+        print("Error:", e)
             
                 
 
